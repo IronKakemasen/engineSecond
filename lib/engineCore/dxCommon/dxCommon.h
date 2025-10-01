@@ -30,13 +30,9 @@ class DxCommon
 {
 
 public:
-	//[ Dubug ]
-#ifdef _DEBUG
 
 	static inline bool debugLayerSwitch = false;
 	static inline std::ofstream debugLog;
-
-#endif 
 
 	float windowColor[4] = { 0.1f,0.1f,0.1f,1.0f };
 
