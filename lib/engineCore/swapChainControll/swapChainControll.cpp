@@ -17,13 +17,17 @@ D3D12_RENDER_TARGET_VIEW_DESC SwapChainControll::GetRenderTargetView(ID3D12Devic
 	//ディスクリプタの先頭を取得する
 	D3D12_CPU_DESCRIPTOR_HANDLE rtvStartHandle = dH_rtv_->GetCPUDescriptorHandleForHeapStart();
 	//1つめを作る。１つ目は最初に作る。作る場所をこちらで指定する必要がある
-	rtvHandles[0] = rtvStartHandle;
-	device_->CreateRenderTargetView(swapChainResources[0].Get(), &rtvDesc, rtvHandles[0]);
+	swapChain_resourcesAndHandles[0].rtvHandle = rtvStartHandle;
+	device_->CreateRenderTargetView(swapChain_resourcesAndHandles[0].resource.Get(), 
+		&rtvDesc, swapChain_resourcesAndHandles[0].rtvHandle);
 	//2つめのディスクリプタハンドルを得る
-	rtvHandles[1].ptr = rtvHandles[0].ptr + device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+	swapChain_resourcesAndHandles[1].rtvHandle.ptr = 
+		swapChain_resourcesAndHandles[0].rtvHandle.ptr + device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 	//2つめを作る
-	device_->CreateRenderTargetView(swapChainResources[1].Get(), &rtvDesc, rtvHandles[1]);
+	device_->CreateRenderTargetView(
+		swapChain_resourcesAndHandles[1].resource.Get(), &rtvDesc, swapChain_resourcesAndHandles[1].rtvHandle);
 
+	ResourceAndHandleForRender::cur_handlePtr.ptr = swapChain_resourcesAndHandles[1].rtvHandle.ptr;
 
 	return rtvDesc;
 }
@@ -64,10 +68,10 @@ void SwapChainControll::PullSwapChainResource()
 	Log(DxCommon::debugLog, "Complete create rtvDescriptorHeap\n");
 
 	//SwapChainからResourceを引っ張ってくる
-	HRESULT hr = swapChain->GetBuffer(0, IID_PPV_ARGS(&swapChainResources[0]));
+	HRESULT hr = swapChain->GetBuffer(0, IID_PPV_ARGS(&swapChain_resourcesAndHandles[0].resource));
 	//生成失敗
 	assert(SUCCEEDED(hr));
-	hr = swapChain->GetBuffer(1, IID_PPV_ARGS(&swapChainResources[1]));
+	hr = swapChain->GetBuffer(1, IID_PPV_ARGS(&swapChain_resourcesAndHandles[1].resource));
 	//生成失敗
 	assert(SUCCEEDED(hr));
 	Log(DxCommon::debugLog, "Complete pull Resource\n");
@@ -79,6 +83,7 @@ DXGI_SWAP_CHAIN_DESC1 SwapChainControll::Initialize(HWND* hwnd_, ID3D12CommandQu
 {
 	DXGI_SWAP_CHAIN_DESC1 desc = CreateSwapChain(hwnd_, commandQueue_, dxgiFactory_);
 	PullSwapChainResource();
+	swapChain_resourcesAndHandles->SetDXMatrix(V_Common::kWindow_W, V_Common::kWindow_H);
 
 	return desc;
 }

@@ -18,7 +18,7 @@
 #include "../allShaderData/pixelShaderData.h"
 #include "../vpShaderTable/vpShaderTable.h"
 #include "../depthStencilSetUp/depthStencilSetUp.h"
-
+#include "../gpuResources/lightResources/lightResources.h"
 
 
 #include "../../../external/imgui/imgui.h"
@@ -38,8 +38,16 @@ public:
 
 #endif 
 
+	float windowColor[4] = { 0.1f,0.1f,0.1f,1.0f };
+
 	DxCommon();
 	void Finalize();
+
+	void BeginFrame();
+
+	void EndFrame();
+	static void SetBarrierState(D3D12_RESOURCE_BARRIER& dst_barrier_,
+		D3D12_RESOURCE_STATES before_, D3D12_RESOURCE_STATES after_);
 
 private:
 
@@ -78,20 +86,26 @@ private:
 	//[ DepthStencilSetUp ]
 	DepthStencilSetUp depthStencilSetUp;
 
+	//[ LightResources ]
+	LightResources lightResources;
 
 
 	void CompileAllShaders();
-	void SetShaderTable();
-	D3D12_DESCRIPTOR_RANGE GetShaderViewDescriptorRange();
-	D3D12_RASTERIZER_DESC GetRasterizerDesc(CullMode cullMode_);
-	void CreateAllGraphicsPipelineSets(ID3D12Device* device_);
 
+	void SetShaderTable();
+
+	D3D12_DESCRIPTOR_RANGE GetShaderViewDescriptorRange();
+
+	D3D12_RASTERIZER_DESC GetRasterizerDesc(CullMode cullMode_);
 
 	std::unique_ptr<PipelineSet> CreateGraphicsPipelineSet(ID3D12Device* device_,
 		D3D12_PRIMITIVE_TOPOLOGY_TYPE topologyType_, 
 		BlendMode blendMode_,
 		CullMode cullMode_, 
 		ShaderSet::Type shaderSetType_);
+
+	void CreateAllGraphicsPipelineSets(ID3D12Device* device_);
+
 
 };
 

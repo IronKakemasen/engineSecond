@@ -10,8 +10,6 @@ struct DxCompile
 	Microsoft::WRL::ComPtr<IDxcCompiler3> dxcCompiler = nullptr;
 	Microsoft::WRL::ComPtr<IDxcIncludeHandler> includeHandler = nullptr;
 
-	//Dxのコンパイラーを設定する
-	void SetDXcCompiler();
 	Microsoft::WRL::ComPtr<IDxcBlob> CompileShader(
 		std::string const& fileName_,
 		const wchar_t* profile_,
@@ -20,5 +18,10 @@ struct DxCompile
 		IDxcIncludeHandler* includeHandler_);
 
 	void Initialize();
+
+private:
+	//Dxのコンパイラーを設定する
+	void SetDXcCompiler();
+
 };
 

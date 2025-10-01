@@ -15,8 +15,10 @@ struct DeviceSetUp
 	//デバイス
 	Microsoft::WRL::ComPtr<ID3D12Device> device = nullptr;
 
-	void SetGoodDevice();
 	void Initialize();
+
+private:
+	void SetGoodDevice();
 
 };
 

@@ -20,6 +20,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         //ゲームの処理
         else
         {
+            c.BeginFrame();
+
+
+            c.EndFrame();
 
         }
     }

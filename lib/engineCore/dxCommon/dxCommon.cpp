@@ -26,11 +26,10 @@ DxCommon::DxCommon()
 	//windowの初期化
 	windowSetUp.Initialize(L"2007_シフトトゥ_1.1");
 
-	//[ ウィンドウを表示する ]
-	ShowWindow(windowSetUp.hwnd, SW_SHOW);
-
 	//デバイス探してセットする
 	deviceSetUp.Initialize();
+	//デバイスのアドレスを渡す
+	lightResources.device = deviceSetUp.device.Get();
 
 	//フェンスの設定
 	fenceControll.Initialize(deviceSetUp.device.Get(), deviceSetUp.dxgiFactory.Get());
@@ -40,6 +39,9 @@ DxCommon::DxCommon()
 
 	//コマンドキュー,コマンドアローケータ,コマンドリストの生成
 	commandControll.Initialize(deviceSetUp.device.Get());
+	//コマンドキューのアドレスを渡す
+
+
 
 	//swapChainの設定
 	DXGI_SWAP_CHAIN_DESC1 swapChainDesc = swapChainControll.Initialize(
@@ -59,7 +61,7 @@ DxCommon::DxCommon()
 	SetShaderTable();
 
 	//すべてのGraphicsPipelineを生成（いつか個別ごとに変更するかも）
-	//CreateAllGraphicsPipelineSets(deviceSetUp.device.Get());
+	CreateAllGraphicsPipelineSets(deviceSetUp.device.Get());
 
 	//swapChainのRTVの設定
 	D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = 
@@ -94,9 +96,9 @@ void DxCommon::Finalize()
 	CloseHandle(fenceControll.fenceEvent);
 
 	//[ ImGui ]
-	//ImGui_ImplDX12_Shutdown();
-	//ImGui_ImplWin32_Shutdown();
-	//ImGui::DestroyContext();
+	ImGui_ImplDX12_Shutdown();
+	ImGui_ImplWin32_Shutdown();
+	ImGui::DestroyContext();
 
 
 	CloseWindow(windowSetUp.hwnd);
@@ -194,10 +196,16 @@ std::unique_ptr<PipelineSet> DxCommon::CreateGraphicsPipelineSet(ID3D12Device* d
 	//pixelShaderBlob
 	IDxcBlob* srcPixelShaderBlob = vpShaderTable.Get(shaderSetType_).pixShaderBlob;
 
-	//shaderBlobをセット
+	//shaderBlobをセット(Vertex)
 	graghicsPipeLineStatedesc.VS =
 	{
 		srcVertexShaderBlob->GetBufferPointer(),
+		srcVertexShaderBlob->GetBufferSize()
+	};
+	//shaderBlobをセット(Pixel)
+	graghicsPipeLineStatedesc.PS =
+	{
+		srcPixelShaderBlob->GetBufferPointer(),
 		srcPixelShaderBlob->GetBufferSize()
 	};
 
@@ -461,4 +469,113 @@ void DxCommon::CreateAllGraphicsPipelineSets(ID3D12Device* device_)
 	pipelineSetLines[kBlendModeAdd][(int)CullMode::kNone][ShaderSet::Type::kDefaultAndTest] =
 		CreateGraphicsPipelineSet(device_, D3D12_PRIMITIVE_TOPOLOGY_TYPE_LINE, kBlendModeAdd, CullMode::kNone, ShaderSet::Type::kDefaultAndTest);
 
+}
+
+
+void DxCommon::BeginFrame()
+{
+	//time += deltaTime;
+	//commonVariablesData->time = time;
+
+	////キーボード情報の取得
+	//inputs.keyboard->Acquire();
+	//inputs.keyboard->GetDeviceState(sizeof(*key) * 256, key);
+	////マウスの情報の取得
+	//inputs.mouse->Acquire();
+	//inputs.mouse->GetDeviceState(sizeof(*mouseState_), mouseState_);
+
+	//Imguiにここからフレームが始まる旨を告げる
+	ImGui_ImplDX12_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+
+	//描画先のRTV、DSVを設定する
+	depthStencilSetUp.dsvHandle = descriptorHeapSet.dH_dsv->GetCPUDescriptorHandleForHeapStart();
+
+	D3D12_RESOURCE_BARRIER barrier{};
+
+	//これから書き込むバックバッファのインデックスを取得
+	UINT backBufferIndex = swapChainControll.swapChain->GetCurrentBackBufferIndex();
+	//バリアの設定
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	//Noneにしておく
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	//バリアを張る対象のリソース。現在のバックバッファーに対して行う
+	barrier.Transition.pResource = swapChainControll.swapChain_resourcesAndHandles[backBufferIndex].resource.Get();
+	//バリアステートを遷移
+	SetBarrierState(barrier, D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
+	//TransitionBarrierを張る
+	commandControll.commandList->ResourceBarrier(1, &barrier);
+
+	commandControll.commandList->OMSetRenderTargets(1,
+		&swapChainControll.swapChain_resourcesAndHandles[backBufferIndex].rtvHandle, false, &depthStencilSetUp.dsvHandle);
+	//指定した深度で画面クリアする
+	commandControll.commandList->ClearDepthStencilView(depthStencilSetUp.dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+	//指定した色で画面全体をクリアする
+	commandControll.commandList->ClearRenderTargetView(
+		swapChainControll.swapChain_resourcesAndHandles[backBufferIndex].rtvHandle, windowColor, 0, nullptr);
+	////描画用のDescriptorHeapの設定
+	ID3D12DescriptorHeap* descriptorHeaps[] = { descriptorHeapSet.dH_srv.Get() };
+	commandControll.commandList->SetDescriptorHeaps(1, descriptorHeaps);
+	//DXの行列の設定
+	//D3D12_VIEWPORT viewPort{};
+	//D3D12_RECT scissorRect{};
+	//SetDXMatrix(viewPort, scissorRect);
+	commandControll.commandList->RSSetViewports(1,
+		&swapChainControll.swapChain_resourcesAndHandles[0].viewport);
+
+	commandControll.commandList->RSSetScissorRects(1, 
+		&swapChainControll.swapChain_resourcesAndHandles[0].scissorRect);
+}
+void DxCommon::EndFrame()
+{
+	//DrawIndexのリセット
+	//DrawIndexReset();
+
+	ImGui::Render();
+	//実際のcommandListのImguiの描画コマンドを積む
+	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), commandControll.commandList.Get());
+
+	//これから書き込むバックバッファのインデックスを取得
+	UINT backBufferIndex = swapChainControll.swapChain->GetCurrentBackBufferIndex();
+	D3D12_RESOURCE_BARRIER barrier{};
+	//バリアの設定
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	//Noneにしておく
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	//バリアを張る対象のリソース。現在のバックバッファーに対して行う
+	barrier.Transition.pResource = 
+		swapChainControll.swapChain_resourcesAndHandles[backBufferIndex].resource.Get();
+
+	//画面に書く処理が終わり、画面に映すので状態を遷移
+	//RenderTarget->Prsent
+	SetBarrierState(barrier, D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
+
+	//TransitionBarrierを張る
+	commandControll.commandList->ResourceBarrier(1, &barrier);
+
+	//コマンドリストの内容を確定させる
+	HRESULT hr = commandControll.commandList->Close();
+	assert(SUCCEEDED(hr));
+
+	//GPUにコマンドリストの実行を行わさせる
+	ID3D12CommandList* commandLists[] = { commandControll.commandList.Get() };
+	commandControll.commandQueue->ExecuteCommandLists(1, commandLists);
+	//GPUとOSに画面の交換を行うように通知する
+	swapChainControll.swapChain->Present(1, 0);
+
+	//イベントを待つ
+	fenceControll.WaitFenceEvent(commandControll.commandQueue.Get());
+	//次のフレーム用のコマンドリストを準備
+	commandControll.PrepareForNextCommandList();
+
+	//fpsController.TimeAdjust();
+	//deltaTime = 1.0f / ImGui::GetIO().Framerate;
+
+}
+
+void DxCommon::SetBarrierState(D3D12_RESOURCE_BARRIER& dst_barrier_, D3D12_RESOURCE_STATES before_, D3D12_RESOURCE_STATES after_)
+{
+	dst_barrier_.Transition.StateBefore = before_;
+	dst_barrier_.Transition.StateAfter = after_;
 }

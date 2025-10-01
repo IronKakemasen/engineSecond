@@ -7,6 +7,7 @@
 void WindowSetUp::SetWindow(LPCWSTR const windowTitle_)
 {
 #ifdef _DEBUG
+
 	if (DxCommon::debugLayerSwitch)
 	{
 		if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
@@ -55,6 +56,10 @@ void WindowSetUp::SetWindow(LPCWSTR const windowTitle_)
 void WindowSetUp::Initialize(LPCWSTR const windowTitle_)
 {
 	SetWindow(windowTitle_);
+
+	//[ ウィンドウを表示する ]
+	ShowWindow(hwnd, SW_SHOW);
+
 }
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)

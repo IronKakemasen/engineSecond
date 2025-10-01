@@ -12,6 +12,12 @@ struct CommandControll
 	//コマンドリスト		
 	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList = nullptr;
 
+	void Initialize(ID3D12Device* device_);
+
+	void PrepareForNextCommandList();
+
+
+private:
 	//コマンドキューの生成
 	void MakeCommandQueue(ID3D12Device* device_);
 	//コマンドアローケータの生成
@@ -19,7 +25,6 @@ struct CommandControll
 	//コマンドリストを生成する
 	void MakeCommandList(ID3D12Device* device_);
 
-	void Initialize(ID3D12Device* device_);
 
 };
 

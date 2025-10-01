@@ -12,8 +12,12 @@ struct FenceControll
 	uint64_t fenceValue = 0;
 	HANDLE fenceEvent = nullptr;
 
-	void SetFence(ID3D12Device* device_, IDXGIFactory7* dxgiFactory_);
 	void Initialize(ID3D12Device* device_, IDXGIFactory7* dxgiFactory_);
+	void WaitFenceEvent(ID3D12CommandQueue* commandQueue_);
+
+
+private:
+	void SetFence(ID3D12Device* device_, IDXGIFactory7* dxgiFactory_);
 
 };
 

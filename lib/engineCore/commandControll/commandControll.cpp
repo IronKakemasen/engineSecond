@@ -4,6 +4,14 @@
 
 #pragma comment(lib,"d3d12.lib")
 
+void CommandControll::PrepareForNextCommandList()
+{
+	HRESULT hr = commandAllocator->Reset();
+	assert(SUCCEEDED(hr));
+	hr = commandList->Reset(commandAllocator.Get(), nullptr);;
+	assert(SUCCEEDED(hr));
+}
+
 void CommandControll::Initialize(ID3D12Device* device_)
 {
 	//コマンドキューの生成

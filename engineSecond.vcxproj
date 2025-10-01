@@ -102,18 +102,24 @@
     <ClCompile Include="lib\engineCore\constantBuffer\cameraInfo\cameraInfo.cpp" />
     <ClCompile Include="lib\engineCore\constantBuffer\commonInfo\commonInfo.cpp" />
     <ClCompile Include="lib\commonVariables.cpp" />
+    <ClCompile Include="lib\engineCore\gpuResources\gpuResources.cpp" />
+    <ClCompile Include="lib\engineCore\leakChecker\leakChecker.cpp" />
+    <ClCompile Include="lib\engineCore\lightBasicStructure\directionalLight\directionalLight.cpp" />
+    <ClCompile Include="lib\engineCore\lightBasicStructure\lightBasicStructure.cpp" />
     <ClCompile Include="lib\engineCore\logAndException\detectException.cpp" />
     <ClCompile Include="lib\engineCore\logAndException\outputDebugLog.cpp" />
     <ClCompile Include="lib\engineCore\material\material.cpp" />
     <ClCompile Include="lib\engineCore\pipelineSet\pipelineSet.cpp" />
     <ClCompile Include="lib\engineCore\vertexData\VertexData.cpp" />
     <ClCompile Include="lib\engineCore\vpShaderTable\vpShaderTable.cpp" />
+    <ClCompile Include="lib\engineCore\gpuResources\lightResources\lightResources.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="lib\math\matrix\matrix.cpp" />
     <ClCompile Include="lib\math\vector\vector.cpp" />
     <ClCompile Include="lib\utilities\vectorAndMatrix\vectorAndMatrix.cpp" />
     <ClCompile Include="lib\engineCore\swapChainControll\swapChainControll.cpp" />
     <ClCompile Include="lib\engineCore\windowSetup\windowSetUp.cpp" />
+    <ClCompile Include="lib\engineCore\gpuResources\resourceAndHandleForRender\resourceAndHandleForRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engineCore\depthStencilSetUp\depthStencilSetUp.h" />
@@ -136,6 +142,10 @@
     <ClInclude Include="lib\engineCore\constantBuffer\cameraInfo\cameraInfo.h" />
     <ClInclude Include="lib\engineCore\constantBuffer\commonInfo\commonInfo.h" />
     <ClInclude Include="lib\commonVariables.h" />
+    <ClInclude Include="lib\engineCore\gpuResources\gpuResources.h" />
+    <ClInclude Include="lib\engineCore\leakChecker\leakChecker.h" />
+    <ClInclude Include="lib\engineCore\lightBasicStructure\directionalLight\directionalLight.h" />
+    <ClInclude Include="lib\engineCore\lightBasicStructure\lightBasicStructure.h" />
     <ClInclude Include="lib\engineCore\logAndException\detectException.h" />
     <ClInclude Include="lib\engineCore\logAndException\outputDebugLog.h" />
     <ClInclude Include="lib\engineCore\material\material.h" />
@@ -147,6 +157,8 @@
     <ClInclude Include="lib\utilities\vectorAndMatrix\vectorAndMatrix.h" />
     <ClInclude Include="lib\engineCore\swapChainControll\swapChainControll.h" />
     <ClInclude Include="lib\engineCore\windowSetup\windowSetUp.h" />
+    <ClInclude Include="lib\engineCore\gpuResources\lightResources\lightResources.h" />
+    <ClInclude Include="lib\engineCore\gpuResources\resourceAndHandleForRender\resourceAndHandleForRender.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="external\imgui\imgui.vcxproj" />
