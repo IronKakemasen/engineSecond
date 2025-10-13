@@ -1,11 +1,11 @@
-name: DevelopmentBuild
+name: DevelopBuild
 on:
   push:
     branches:
       - master
 env:
   SOLUTION_FILE_PATH: project/engineSecond.sln
-  CONFIGURATION: Development
+  CONFIGURATION: Develop
 jobs:
   build:
     runs-on: windows-2022
