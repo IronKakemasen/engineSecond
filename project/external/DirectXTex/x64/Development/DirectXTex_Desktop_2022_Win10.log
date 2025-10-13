@@ -1,0 +1,6 @@
+﻿  BC.cpp
+  BCDirectCompute.cpp
+C:\Users\81805\Desktop\miyaG\engineSecond\project\external\DirectXTex\BCDirectCompute.cpp(27,18): error C1083: include ファイルを開けません。'BC7Encode_EncodeBlockCS.inc':No such file or directory
+  DirectXTexCompress.cpp
+  DirectXTexUtil.cpp
+  コードを生成中...
