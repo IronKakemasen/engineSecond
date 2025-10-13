@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="lib\engineCore\inputs\keyboard\keyboard.cpp" />
     <ClCompile Include="lib\engineCore\barrierControll\barrierControll.cpp" />
     <ClCompile Include="lib\engineCore\depthStencilSetUp\depthStencilSetUp.cpp" />
     <ClCompile Include="lib\engineCore\allShaderData\pixelShaderData.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="lib\engineCore\gpuResources\resourceAndHandleForRender\resourceAndHandleForRender.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="lib\engineCore\inputs\keyboard\keyboard.h" />
     <ClInclude Include="lib\engineCore\barrierControll\barrierControll.h" />
     <ClInclude Include="lib\engineCore\depthStencilSetUp\depthStencilSetUp.h" />
     <ClInclude Include="lib\engineCore\allShaderData\pixelShaderData.h" />

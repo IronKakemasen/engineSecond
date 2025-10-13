@@ -25,7 +25,10 @@ DxCommon::DxCommon()
 	SetUnhandledExceptionFilter(ExportDump);
 
 	//windowの初期化
-	windowSetUp.Initialize(L"2007_シフトトゥ_1.1");
+	WNDCLASS wc = windowSetUp.Initialize(L"2007_シフトトゥ_1.1");
+
+	//入力の初期化
+	keyboardInput.Initialize(windowSetUp.hwnd, wc);
 
 	//デバイス探してセットする
 	deviceSetUp.Initialize();
@@ -94,6 +97,8 @@ DxCommon::DxCommon()
 void DxCommon::Finalize()
 {
 	CloseHandle(fenceControll.fenceEvent);
+
+	keyboardInput.Finalize();
 
 	//[ ImGui ]
 	ImGui_ImplDX12_Shutdown();
@@ -472,14 +477,14 @@ void DxCommon::CreateAllGraphicsPipelineSets(ID3D12Device* device_)
 }
 
 
-void DxCommon::BeginFrame()
+void DxCommon::BeginFrame(BYTE* key_)
 {
 	//time += deltaTime;
 	//commonVariablesData->time = time;
 
-	////キーボード情報の取得
-	//inputs.keyboard->Acquire();
-	//inputs.keyboard->GetDeviceState(sizeof(*key) * 256, key);
+	//キーボード情報の取得
+	keyboardInput.keyboard->Acquire();
+	keyboardInput.keyboard->GetDeviceState(sizeof(*key_) * 256, key_);
 	////マウスの情報の取得
 	//inputs.mouse->Acquire();
 	//inputs.mouse->GetDeviceState(sizeof(*mouseState_), mouseState_);

@@ -1,5 +1,4 @@
 #pragma once
-
 #define DIRECTINPUT_VERSION 0x0800
 
 //#include <DirectXMath.h>
@@ -19,6 +18,7 @@
 #include "../vpShaderTable/vpShaderTable.h"
 #include "../depthStencilSetUp/depthStencilSetUp.h"
 #include "../gpuResources/lightResources/lightResources.h"
+#include "../inputs/keyboard/keyboard.h"
 
 
 #include "../../../external/imgui/imgui.h"
@@ -38,7 +38,7 @@ public:
 
 	DxCommon();
 	void Finalize();
-	void BeginFrame();
+	void BeginFrame(BYTE* key_);
 	void EndFrame();
 
 private:
@@ -81,6 +81,8 @@ private:
 	//[ LightResources ]
 	LightResources lightResources;
 
+	//[ Keyboard ]
+	KeyBoard keyboardInput;
 
 	void CompileAllShaders();
 

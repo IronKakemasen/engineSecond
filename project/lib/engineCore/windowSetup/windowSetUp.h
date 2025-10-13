@@ -13,11 +13,11 @@ struct WindowSetUp
 	//ウィンドウハンドル
 	HWND hwnd;
 
-	void Initialize(LPCWSTR const windowTitle_);
+	WNDCLASS Initialize(LPCWSTR const windowTitle_);
 
 private:
 	//ウィンドウとかの初期化
-	void SetWindow(LPCWSTR const windowTitle_);
+	WNDCLASS SetWindow(LPCWSTR const windowTitle_);
 
 };
 

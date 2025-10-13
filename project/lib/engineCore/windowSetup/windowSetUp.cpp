@@ -4,7 +4,7 @@
 
 #pragma comment(lib,"d3d12.lib")
 
-void WindowSetUp::SetWindow(LPCWSTR const windowTitle_)
+WNDCLASS WindowSetUp::SetWindow(LPCWSTR const windowTitle_)
 {
 #ifdef _DEBUG
 
@@ -50,16 +50,17 @@ void WindowSetUp::SetWindow(LPCWSTR const windowTitle_)
 		wc.hInstance,			//インスタンスハンドル
 		nullptr);				//オプション
 
-
+	return wc;
 }
 
-void WindowSetUp::Initialize(LPCWSTR const windowTitle_)
+WNDCLASS WindowSetUp::Initialize(LPCWSTR const windowTitle_)
 {
-	SetWindow(windowTitle_);
+	WNDCLASS wc = SetWindow(windowTitle_);
 
 	//[ ウィンドウを表示する ]
 	ShowWindow(hwnd, SW_SHOW);
 
+	return wc;
 }
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
