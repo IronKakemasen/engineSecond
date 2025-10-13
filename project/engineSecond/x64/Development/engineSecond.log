@@ -1,0 +1,112 @@
+﻿  depthStencilSetUp.cpp
+  pixelShaderData.cpp
+  vertexShaderData.cpp
+  dxCompile.cpp
+  commandControll.cpp
+  fenceControll.cpp
+  deviceSetUp.cpp
+  descriptorHeaps.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_dx12.cpp
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  dxCommon.cpp
+  cameraInfo.cpp
+  commonInfo.cpp
+  commonVariables.cpp
+  gpuResources.cpp
+  leakChecker.cpp
+  directionalLight.cpp
+  lightBasicStructure.cpp
+  detectException.cpp
+  outputDebugLog.cpp
+  material.cpp
+  pipelineSet.cpp
+  VertexData.cpp
+  vpShaderTable.cpp
+  lightResources.cpp
+  main.cpp
+  matrix.cpp
+  vector.cpp
+  vectorAndMatrix.cpp
+  swapChainControll.cpp
+  windowSetUp.cpp
+  resourceAndHandleForRender.cpp
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\commandControll\commandControll.cpp(34,16): error C2039: 'debugLog': 'DxCommon' のメンバーではありません
+      C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.h(29,7):
+      'DxCommon' の宣言を確認してください
+  
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\commandControll\commandControll.cpp(34,16): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\commandControll\commandControll.cpp(42,16): error C2039: 'debugLog': 'DxCommon' のメンバーではありません
+      C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.h(29,7):
+      'DxCommon' の宣言を確認してください
+  
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\commandControll\commandControll.cpp(42,16): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\commandControll\commandControll.cpp(50,16): error C2039: 'debugLog': 'DxCommon' のメンバーではありません
+      C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.h(29,7):
+      'DxCommon' の宣言を確認してください
+  
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\commandControll\commandControll.cpp(50,16): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\fenceControll\fenceControll.cpp(38,16): error C2039: 'debugLog': 'DxCommon' のメンバーではありません
+      C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.h(29,7):
+      'DxCommon' の宣言を確認してください
+  
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\fenceControll\fenceControll.cpp(38,16): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\fenceControll\fenceControll.cpp(43,16): error C2039: 'debugLog': 'DxCommon' のメンバーではありません
+      C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.h(29,7):
+      'DxCommon' の宣言を確認してください
+  
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\fenceControll\fenceControll.cpp(43,16): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCompile\dxCompile.cpp(28,16): error C2039: 'debugLog': 'DxCommon' のメンバーではありません
+      C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.h(29,7):
+      'DxCommon' の宣言を確認してください
+  
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCompile\dxCompile.cpp(28,16): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCompile\dxCompile.cpp(68,16): error C2039: 'debugLog': 'DxCommon' のメンバーではありません
+      C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.h(29,7):
+      'DxCommon' の宣言を確認してください
+  
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCompile\dxCompile.cpp(68,16): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCompile\dxCompile.cpp(85,16): error C2039: 'debugLog': 'DxCommon' のメンバーではありません
+      C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.h(29,7):
+      'DxCommon' の宣言を確認してください
+  
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCompile\dxCompile.cpp(85,16): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\deviceSetUp\deviceSetUp.cpp(36,18): error C2039: 'debugLog': 'DxCommon' のメンバーではありません
+      C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.h(29,7):
+      'DxCommon' の宣言を確認してください
+  
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\deviceSetUp\deviceSetUp.cpp(36,18): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\deviceSetUp\deviceSetUp.cpp(64,18): error C2039: 'debugLog': 'DxCommon' のメンバーではありません
+      C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.h(29,7):
+      'DxCommon' の宣言を確認してください
+  
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\deviceSetUp\deviceSetUp.cpp(64,18): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\deviceSetUp\deviceSetUp.cpp(71,16): error C2039: 'debugLog': 'DxCommon' のメンバーではありません
+      C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.h(29,7):
+      'DxCommon' の宣言を確認してください
+  
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\deviceSetUp\deviceSetUp.cpp(71,16): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.cpp(20,2): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.cpp(140,7): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.cpp(148,7): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.cpp(303,6): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.cpp(394,6): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\swapChainControll\swapChainControll.cpp(60,16): error C2039: 'debugLog': 'DxCommon' のメンバーではありません
+      C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.h(29,7):
+      'DxCommon' の宣言を確認してください
+  
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\swapChainControll\swapChainControll.cpp(60,16): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\swapChainControll\swapChainControll.cpp(68,16): error C2039: 'debugLog': 'DxCommon' のメンバーではありません
+      C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.h(29,7):
+      'DxCommon' の宣言を確認してください
+  
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\swapChainControll\swapChainControll.cpp(68,16): error C2065: 'debugLog': 定義されていない識別子です。
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\swapChainControll\swapChainControll.cpp(77,16): error C2039: 'debugLog': 'DxCommon' のメンバーではありません
+      C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\dxCommon\dxCommon.h(29,7):
+      'DxCommon' の宣言を確認してください
+  
+C:\Users\81805\Desktop\miyaG\engineSecond\lib\engineCore\swapChainControll\swapChainControll.cpp(77,16): error C2065: 'debugLog': 定義されていない識別子です。

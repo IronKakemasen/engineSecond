@@ -1,1 +1,0 @@
-#include "lightResources.h"
