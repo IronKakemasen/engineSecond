@@ -19,6 +19,7 @@
 #include "../depthStencilSetUp/depthStencilSetUp.h"
 #include "../gpuResources/lightResources/lightResources.h"
 #include "../inputs/keyboard/keyboard.h"
+#include "../inputs/pad/padInput.h"
 
 
 #include "../../../external/imgui/imgui.h"
@@ -83,6 +84,8 @@ private:
 
 	//[ Keyboard ]
 	KeyBoard keyboardInput;
+
+	//[ pad ]
 
 	void CompileAllShaders();
 

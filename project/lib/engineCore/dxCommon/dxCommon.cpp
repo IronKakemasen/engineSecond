@@ -29,6 +29,7 @@ DxCommon::DxCommon()
 
 	//入力の初期化
 	keyboardInput.Initialize(windowSetUp.hwnd, wc);
+	InitInput();
 
 	//デバイス探してセットする
 	deviceSetUp.Initialize();
@@ -99,11 +100,13 @@ void DxCommon::Finalize()
 	CloseHandle(fenceControll.fenceEvent);
 
 	keyboardInput.Finalize();
+	ReleaseInput();
 
 	//[ ImGui ]
 	ImGui_ImplDX12_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();
+
 
 
 	CloseWindow(windowSetUp.hwnd);
@@ -482,9 +485,12 @@ void DxCommon::BeginFrame(BYTE* key_)
 	//time += deltaTime;
 	//commonVariablesData->time = time;
 
-	//キーボード情報の取得
-	keyboardInput.keyboard->Acquire();
-	keyboardInput.keyboard->GetDeviceState(sizeof(*key_) * 256, key_);
+	////キーボード情報の取得
+	//keyboardInput.keyboard->Acquire();
+	//keyboardInput.keyboard->GetDeviceState(sizeof(*key_) * 256, key_);
+	
+	UpdateInput();
+
 	////マウスの情報の取得
 	//inputs.mouse->Acquire();
 	//inputs.mouse->GetDeviceState(sizeof(*mouseState_), mouseState_);

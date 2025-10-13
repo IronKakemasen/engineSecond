@@ -171,6 +171,7 @@
     <ClCompile Include="lib\engineCore\swapChainControll\swapChainControll.cpp" />
     <ClCompile Include="lib\engineCore\windowSetup\windowSetUp.cpp" />
     <ClCompile Include="lib\engineCore\gpuResources\resourceAndHandleForRender\resourceAndHandleForRender.cpp" />
+    <ClCompile Include="lib\engineCore\inputs\pad\padInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\engineCore\inputs\keyboard\keyboard.h" />
@@ -212,6 +213,7 @@
     <ClInclude Include="lib\engineCore\windowSetup\windowSetUp.h" />
     <ClInclude Include="lib\engineCore\gpuResources\lightResources\lightResources.h" />
     <ClInclude Include="lib\engineCore\gpuResources\resourceAndHandleForRender\resourceAndHandleForRender.h" />
+    <ClInclude Include="lib\engineCore\inputs\pad\padInput.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="external\imgui\imgui.vcxproj" />
